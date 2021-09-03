@@ -2,7 +2,56 @@
 
 <body>
     <script>
-        
+
+    let opts = ['rock', 'paper', 'scissors'];
+
+    function computerPlay() {
+        return opts[~~(Math.random() * opts.length)];
+    }
+
+    function playerPlay() {
+        return playerSelection = prompt("shoot");
+    }
+
+    function playRound() {
+        const playerSelection = playerPlay().toLowerCase();
+        const computerSelection = computerPlay().toLowerCase();
+
+            if (computerSelection == playerSelection) {
+            console.log("(Round " + round + ") \nIt's a tie.");
+            return ("tie");
+            } else if ((computerSelection == "rock" && playerSelection == "scissors") ||
+                    (computerSelection == "scissors" && playerSelection == "paper") ||
+                    (computerSelection == "paper" && playerSelection == "rock") 
+            ){
+                console.log("(Round " + round + ") \nComputer wins... " + computerSelection + " beats " + playerSelection);
+                return "computer";
+            } else {
+                console.log("(Round " + round + ") \nYou win! " + playerSelection + " beats " + computerSelection);
+                return "player";
+            }
+        }
+
+    let computerScore = 0;
+    let playerScore = 0;
+
+    function game() {
+        for (round = 1; round <= 5;) {
+            var result = playRound();
+            if (result === "computer") {
+                computerScore++;
+                console.log("You: " + playerScore + " | Computer: " + computerScore);
+            } else if (result === "player") {
+                playerScore++;
+                console.log("You: " + playerScore + " | Computer: " + computerScore);
+            }
+            round++;
+        }
+
+    }
+
+    game();
 
     </script>
+    
 </body>
