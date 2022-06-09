@@ -44,8 +44,17 @@
             } else if (result === "player") {
                 playerScore++;
                 console.log("You: " + playerScore + " | Computer: " + computerScore);
+            } else {
+                console.log("You: " + playerScore + " | Computer: " + computerScore);
             }
             round++;
+        }
+        if (playerScore === computerScore) {
+            console.log("Tie Game");
+        } else if (playerScore > computerScore) {
+            console.log("WINNER!!");
+        } else {
+            console.log("LOSER...");
         }
 
     }
