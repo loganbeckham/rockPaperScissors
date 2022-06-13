@@ -1,66 +1,85 @@
 <!DOCTYPE html>
 
+<html lang="en">
+<meta charset="UTF-8">
+<title>Page Title</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="">
+<style>
+</style>
+
 <body>
+    <div id="display">
+    </div>
+    <div id="score">
+    </div>
+    <div id="btns">
+    <button id="rock">rock</button>
+    <button id="paper">paper</button>
+    <button id="scissors">scissors</button>
+    </div>
+
     <script>
 
     let opts = ['rock', 'paper', 'scissors'];
+    let computerScore = 0;
+    let playerScore = 0;
+    const display = document.querySelector('#display');
+    display.textContent = 'Choose your weapon'
+    score.textContent = "You: " + playerScore + " | Computer: " + computerScore
 
     function computerPlay() {
         return opts[~~(Math.random() * opts.length)];
     }
 
-    function playerPlay() {
-        return playerSelection = prompt("shoot");
-    }
-
-    function playRound() {
-        const playerSelection = playerPlay().toLowerCase();
+    function playRound(click) {
+        const playerSelection = click;
         const computerSelection = computerPlay().toLowerCase();
 
-            if (computerSelection == playerSelection) {
-            console.log("(Round " + round + ") \nIt's a tie.");
+
+
+        if (computerSelection == playerSelection) {
+            display.textContent = "It's a tie."
             return ("tie");
-            } else if ((computerSelection == "rock" && playerSelection == "scissors") ||
+
+        } else if ((computerSelection == "rock" && playerSelection == "scissors") ||
                     (computerSelection == "scissors" && playerSelection == "paper") ||
-                    (computerSelection == "paper" && playerSelection == "rock") 
+                    (computerSelection == "paper" && playerSelection == "rock")
             ){
-                console.log("(Round " + round + ") \nComputer wins... " + computerSelection + " beats " + playerSelection);
-                return "computer";
-            } else {
-                console.log("(Round " + round + ") \nYou win! " + playerSelection + " beats " + computerSelection);
-                return "player";
-            }
-        }
-
-    let computerScore = 0;
-    let playerScore = 0;
-
-    function game() {
-        for (round = 1; round <= 5;) {
-            var result = playRound();
-            if (result === "computer") {
                 computerScore++;
-                console.log("You: " + playerScore + " | Computer: " + computerScore);
-            } else if (result === "player") {
-                playerScore++;
-                console.log("You: " + playerScore + " | Computer: " + computerScore);
-            } else {
-                console.log("You: " + playerScore + " | Computer: " + computerScore);
-            }
-            round++;
+                display.textContent = "Uh Oh... " + computerSelection + " beats " + playerSelection
+                score.textContent = "You: " + playerScore + " | Computer: " + computerScore;
+                
+                if (computerScore == 5) {
+                    score.textContent = "Game Over - " + "You: " + playerScore + " | Computer: " + computerScore
+                    playerScore = 0;
+                    computerScore = 0;
         }
-        if (playerScore === computerScore) {
-            console.log("Tie Game");
-        } else if (playerScore > computerScore) {
-            console.log("WINNER!!");
         } else {
-            console.log("LOSER...");
+                playerScore++;
+                display.textContent = "Nice! " + playerSelection + " beats " + computerSelection
+                score.textContent = "You: " + playerScore + " | Computer: " + computerScore
+                
+                if (playerScore == 5) {
+                    score.textContent = "You win! - " + "You: " + playerScore + " | Computer: " + computerScore
+                    playerScore = 0;
+                    computerScore = 0;
+        }
+        }
         }
 
+    const parent = document.querySelector('#btns');
+    parent.addEventListener("click", logClick, false)
+
+    function logClick(e) {
+        if (e.target !== e.currentTarget) {
+            const clickedItem = e.target.id;
+            playRound(clickedItem);
+        }
+    
+    e.stopPropagation();
     }
 
-    game();
 
     </script>
-    
 </body>
